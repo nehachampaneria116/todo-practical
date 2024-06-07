@@ -24,3 +24,7 @@ If you allow one more hour can complete nodejs with typescript as well.
    ```
 
 2. Create database 'practical'
+
+3. run command 'npm i' (to install dependency)
+
+4. run command 'node index.js'
