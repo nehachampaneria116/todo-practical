@@ -38,7 +38,6 @@ const verifyTokenUser = async (req, res, next) => {
             return res.status(401).send("Unauthorized");
         }
     } catch (err) {
-        console.log(err);
         return res.status(401).send("Unauthorized");
     }
 };

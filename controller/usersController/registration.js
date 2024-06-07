@@ -73,10 +73,10 @@ module.exports.registration = async (req) => {
             errorArray.push(responseObject)
         }
         else {
-            var usernameExist = await common.query.findOne(usersCollection, { where: { email: req.body.email } });
-            if (usernameExist) {
+            var emailExist = await common.query.findOne(usersCollection, { where: { email: req.body.email } });
+            if (emailExist) {
                 /**
-                * USERNAME ALREADY EXIST
+                * email ALREADY EXIST
                 */
                 errorFlag = 1;
                 var successOrError = common.responseServices.successOrErrors("err_011");
@@ -84,15 +84,15 @@ module.exports.registration = async (req) => {
                 errorArray.push(responseObject)
             }
             else {
-                var validationUsername = await common.helpers.emailValidation(req.body.email)
+                var validationEmail = await common.helpers.emailValidation(req.body.email)
 
-                if (validationUsername == false) {
+                if (validationEmail == false) {
                     /**
                      * USERNAME VALIDATION
                      */
                     errorFlag = 1
-                    var successOrError = common.responseServices.successOrErrors("err_04");
-                    var responseObject = common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.username, successOrError.location);
+                    var successOrError = common.responseServices.successOrErrors("err_013");
+                    var responseObject = common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.email, successOrError.location);
                     errorArray.push(responseObject)
                 }
             }
@@ -171,7 +171,6 @@ module.exports.registration = async (req) => {
         }
 
     } catch (error) {
-
         /**
          * CATCH ERROR
          */

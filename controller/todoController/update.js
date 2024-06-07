@@ -71,8 +71,8 @@ module.exports.update = async (req) => {
                     obj.description = req.body.description
                 }
                 if (req.body.dueDate != '' && req.body.dueDate != undefined) {
-                    const validDate = await common.helpers.checkValidDate(req.data.dueDate)
-                    if (validDate = false) {
+                    const validDate = await common.helpers.checkValidDate(req.body.dueDate)
+                    if (validDate == false) {
                         errorFlag = 1;
                         var successOrError = common.responseServices.successOrErrors("err_07");
                         errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.dueDate, successOrError.location))
@@ -80,16 +80,14 @@ module.exports.update = async (req) => {
                         obj.dueDate = req.body.dueDate
                     }
                 }
-                if (req.body.reminderTime == "" || typeof req.body.reminderTime == 'undefined') {
-                    errorFlag = 1;
-                    var successOrError = common.responseServices.successOrErrors("err_02");
-                    errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.reminderTime, successOrError.location))
-                } else {
+                if (req.body.reminderTime == "" && typeof req.body.reminderTime == 'undefined') {
                     const validDate = await common.helpers.checkValidDateTime(req.data.reminderTime)
                     if (validDate = false) {
                         errorFlag = 1;
                         var successOrError = common.responseServices.successOrErrors("err_010");
                         errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.reminderTime, successOrError.location))
+                    } else {
+                        obj.reminderTime = req.body.reminderTime
                     }
                 }
                 if (req.body.isCompleted != '' && req.body.isCompleted != undefined) {
@@ -123,7 +121,7 @@ module.exports.update = async (req) => {
         }
 
     } catch (error) {
-
+        console.log(error);
         /**
          * CATCH ERROR
          */

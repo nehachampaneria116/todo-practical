@@ -28,8 +28,8 @@ module.exports.list = async (req) => {
         }
 
         if (query.dueDate != undefined && query.dueDate != '') {
-            const validDate = await common.helpers.checkValidDate(req.data.dueDate)
-            if (validDate = false) {
+            const validDate = await common.helpers.checkValidDate(query.dueDate)
+            if (validDate == false) {
                 errorFlag = 1;
                 var successOrError = common.responseServices.successOrErrors("err_07");
                 errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.dueDate, successOrError.location))
@@ -102,6 +102,7 @@ module.exports.list = async (req) => {
         return common.responseModel.successGetResponse(successOrError.getall, dataArray, [], pagination);
 
     } catch (error) {
+        console.log(error);
         /**
          * CATCH ERROR
          */

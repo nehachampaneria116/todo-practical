@@ -50,26 +50,16 @@ module.exports.add = async (req) => {
             errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.description, successOrError.location))
         }
 
-        if (req.body.dueDate == "" || typeof req.body.dueDate == 'undefined') {
-            errorFlag = 1;
-            var successOrError = common.responseServices.successOrErrors("err_02");
-            errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.dueDate, successOrError.location))
-        } else {
-            const validDate = await common.helpers.checkValidDate(req.data.dueDate)
-            if (validDate = false) {
-                errorFlag = 1;
-                var successOrError = common.responseServices.successOrErrors("err_07");
-                errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.dueDate, successOrError.location))
-            }
-        }
+
+
 
         if (req.body.dueDate == "" || typeof req.body.dueDate == 'undefined') {
             errorFlag = 1;
             var successOrError = common.responseServices.successOrErrors("err_02");
             errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.dueDate, successOrError.location))
         } else {
-            const validDate = await common.helpers.checkValidDate(req.data.dueDate)
-            if (validDate = false) {
+            const validDate = await common.helpers.checkValidDate(req.body.dueDate)
+            if (validDate == false) {
                 errorFlag = 1;
                 var successOrError = common.responseServices.successOrErrors("err_07");
                 errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.dueDate, successOrError.location))
@@ -81,8 +71,8 @@ module.exports.add = async (req) => {
             var successOrError = common.responseServices.successOrErrors("err_02");
             errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.reminderTime, successOrError.location))
         } else {
-            const validDate = await common.helpers.checkValidDateTime(req.data.reminderTime)
-            if (validDate = false) {
+            const validDate = await common.helpers.checkValidDateTime(req.body.reminderTime)
+            if (validDate == false) {
                 errorFlag = 1;
                 var successOrError = common.responseServices.successOrErrors("err_010");
                 errorArray.push(common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.reminderTime, successOrError.location))
@@ -99,6 +89,7 @@ module.exports.add = async (req) => {
                 title: req.body.title,
                 description: req.body.description,
                 dueDate: req.body.dueDate,
+                reminderTime: req.body.reminderTime,
                 userId: userId
             });
 

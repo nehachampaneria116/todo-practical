@@ -23,19 +23,24 @@ module.exports.delete = async (req) => {
             const query = { id: req.params.id }
 
             var findTodo = await common.query.findOne(todoCollection, { where: query })
+
+            console.log(findTodo);
+
             if (findTodo == null) {
                 /**
                  * INVALID ID
                  */
                 errorFlag = 1;
                 var successOrError = common.responseServices.successOrErrors("err_08");
-                var responseObj = common.responseModel.responseObj(successOrError.code, successOrError.message, successOrError.parameters.todo, successOrError.location);
+                var responseObj = common.responseModel.resObj(successOrError.code, successOrError.message, successOrError.parameters.todo, successOrError.location);
                 errorArray.push(responseObj)
 
             } else {
                 await common.query.remove(todoCollection, query);
             }
 
+
+            console.log(errorArray);
 
             if (errorArray.length >= 0 && errorFlag == 1) {
 
@@ -53,12 +58,13 @@ module.exports.delete = async (req) => {
         }
 
     } catch (error) {
+        console.log(error);
 
         /**
          * CATCH ERROR
          */
         var successOrError = common.responseServices.successOrErrors("ex_00");
-        var responseObj = common.responseModel.responseObj(successOrError.code, error.message, successOrError.parameters.noParams, successOrError.location);
+        var responseObj = common.responseModel.resObj(successOrError.code, error.message, successOrError.parameters.noParams, successOrError.location);
         var array = []
         array.push(responseObj)
         return common.responseModel.failResponse(successOrError.failMsg, {}, array)

@@ -14,7 +14,8 @@ function successOrErrors(key) {
         "todo": "todo",
         "isCompleted": "isCompleted",
         "reminderTime": "reminderTime",
-        "login": "login"
+        "login": "login",
+        "email": "email"
     }
 
     /**
@@ -103,7 +104,7 @@ function successOrErrors(key) {
         "err_010": {
             code: "err_010",
             failMsg: "InvalidDetails",
-            message: "Kindly enter valid date-time format, should be in YYYY-MM-DD HH:mm:ss format",
+            message: "Kindly enter valid date-time format, should be valid UTC format",
             parameters: parameters,
             location: "body"
         },
@@ -118,6 +119,13 @@ function successOrErrors(key) {
             code: "err_012",
             failMsg: "InvalidDetails",
             message: "Invalid login credentials",
+            parameters: parameters,
+            location: "body"
+        },
+        "err_013": {
+            code: "err_013",
+            failMsg: "InvalidDetails",
+            message: "Invalid email.",
             parameters: parameters,
             location: "body"
         },

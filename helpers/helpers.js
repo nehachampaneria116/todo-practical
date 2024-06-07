@@ -1,6 +1,6 @@
-const { games } = require('googleapis/build/src/apis/games');
 const constant = require('../config/constant')
 const jwtDecode = require("jwt-decode")
+const moment = require('moment');
 /**
  * 
  * CHECK STRONG PASSWORD VALIDATION FUNCTION
@@ -41,19 +41,17 @@ async function getUser(bearerToken) {
  * @param {*} date 
  */
 async function checkValidDate(date) {
-    var date = common.moment(query.dueDate).format('YYYY-MM-DD')
-    if (date == 'Invalid date' || (common.moment(req.body.dueDate).isBefore(common.moment().format('YYYY-MM-DD')))) {
+    var validate = moment(date).format('YYYY-MM-DD')
+    if (validate == 'Invalid date' || (moment(date).isBefore(moment().format('YYYY-MM-DD')))) {
         return false;
     }
     return true
 }
 
-async function checkValidDateTime(date) {
-    var date = common.moment(query.dueDate).format('YYYY-MM-DD HH:mm:ss')
-    if (date == 'Invalid date' || (common.moment(req.body.dueDate).isBefore(common.moment().format('YYYY-MM-DD HH:mm:ss')))) {
-        return false;
-    }
-    return true
+async function checkValidDateTime(dateString) {
+    const date = new Date(dateString);
+    return !isNaN(date.getTime()) &&
+        date.toUTCString() !== date.toLocaleString();
 }
 
 /**
@@ -63,6 +61,8 @@ async function checkValidDateTime(date) {
  */
 async function emailValidation(email) {
     var ValidationUsername = email.match(constant.kEmailRegex)
+
+
     return (ValidationUsername) ? true : false;
 }
 

@@ -21,8 +21,6 @@ router.post("/", userVerifyToken, async (req, res) => {
     res.status(ctrlResponse.code).send(ctrlResponse);
   } catch (err) {
 
-    console.log(err);
-
     res.send(err);
   }
 });
@@ -33,7 +31,7 @@ router.post("/", userVerifyToken, async (req, res) => {
 router.get("/", userVerifyToken, async (req, res) => {
   try {
     var ctrlResponse = await listTodo.list(req);
-    res.send(ctrlResponse);
+    res.status(ctrlResponse.code).send(ctrlResponse);
   } catch (err) {
     res.send(err);
   }
@@ -45,7 +43,7 @@ router.get("/", userVerifyToken, async (req, res) => {
 router.put("/:id", userVerifyToken, async (req, res) => {
   try {
     var ctrlResponse = await updateTodo.update(req);
-    res.send(ctrlResponse);
+    res.status(ctrlResponse.code).send(ctrlResponse);
   } catch (err) {
     res.send(err);
   }
@@ -57,7 +55,7 @@ router.put("/:id", userVerifyToken, async (req, res) => {
 router.delete("/:id", userVerifyToken, async (req, res) => {
   try {
     var ctrlResponse = await deleteTodo.delete(req);
-    res.send(ctrlResponse);
+    res.status(ctrlResponse.code).send(ctrlResponse);
   } catch (err) {
     res.send(err);
   }

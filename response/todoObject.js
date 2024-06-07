@@ -12,6 +12,7 @@ async function todoObjectRes(data) {
         description: data.description,
         dueDate: data.dueDate,
         isCompleted: data.isCompleted,
+        reminderTime: data.reminderTime,
         createdAt: data.createdAt,
         updatedAt: data.updatedAt
     }
