@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "0fe6201b-75c5-4466-86e8-fddd648db038",
+		"name": "07-06",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17787253"
+	},
+	"item": [
+		{
+			"name": "Register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"neha123\",\r\n    \"password\": \"Neha@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "create todo ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcxNzc1MjQxNH0.c7tKWi-Vruu3-leh1GSTWBfVcScAZX_Kk7GCvh3Qy18"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\" :\"{{$randomJobTitle}}\",\r\n    \"description\":\"test\",\r\n    \"dueDate\":\"2024-06-07\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/todo"
+			},
+			"response": []
+		},
+		{
+			"name": "List of todo ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcxNzc1MjQxNH0.c7tKWi-Vruu3-leh1GSTWBfVcScAZX_Kk7GCvh3Qy18"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/todo/?limit=1&page=1&order=0&dueDate=2024-06-21",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"todo",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "order",
+							"value": "0"
+						},
+						{
+							"key": "dueDate",
+							"value": "2024-06-21"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update doto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcxNzc1MjQxNH0.c7tKWi-Vruu3-leh1GSTWBfVcScAZX_Kk7GCvh3Qy18"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"neha123\",\r\n    \"description\": \"neh1a\",\r\n    \"dueDate\": \"2024-06-14\",\r\n    \"isCompleted\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/todo/1"
+			},
+			"response": []
+		},
+		{
+			"name": "delete todo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcxNzc1MjQxNH0.c7tKWi-Vruu3-leh1GSTWBfVcScAZX_Kk7GCvh3Qy18"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8000/todo/3"
+			},
+			"response": []
+		},
+		{
+			"name": "User login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"nehachampaneria166@gmail.com\",\r\n    \"password\":\"Neha@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/users/login"
+			},
+			"response": []
+		}
+	]
+}
